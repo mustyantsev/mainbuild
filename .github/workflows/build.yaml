@@ -26,3 +26,5 @@ jobs:
       - name: Create PRs for wrapper repositories
         run: |
           ./.github/workflows/create_auto_pr.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
