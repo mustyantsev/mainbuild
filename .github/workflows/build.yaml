@@ -25,13 +25,4 @@ jobs:
 
       - name: Create PRs for wrapper repositories
         run: |
-          new_cpp_version=${{ env.V_VERSION }}
-          for repo in wrapperbuild wrapperbuild1; do
-            cd $repo
-            git add conanfile.py build.yml
-            git commit -m "Update client-cpp version to $new_cpp_version"
-            git checkout -b update-client-cpp-version
-            git push --set-upstream origin update-client-cpp-version
-            gh pr create --base main --head update-client-cpp-version --title "Update client-cpp version to $new_cpp_version" --body "Automated PR created by GitHub Actions"
-            cd ..
-          done
+          ./.github/workflows/create_auto_pr.sh
