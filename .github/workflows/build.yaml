@@ -12,6 +12,7 @@ jobs:
 
   run-build-ubuntu:
     runs-on: ubuntu-20.04
+    permissions: write-all
     timeout-minutes: 75
     steps:
       - name: Check out repository code
