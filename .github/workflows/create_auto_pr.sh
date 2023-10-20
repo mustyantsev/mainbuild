@@ -21,6 +21,8 @@ fi
 # Get the release details (you might need to adapt this)
 release_info=$(gh release view "mustyantsev/mainbuild" latest --json tag_name --jq "v1.0.0")
 
+echo $release_info
+
 if [ $? -ne 0 ]; then
   echo "Failed to fetch release details for client-cpp."
   exit 1
