@@ -12,7 +12,11 @@ jobs:
 
   run-build-ubuntu:
     runs-on: ubuntu-20.04
-    permissions: write-all
+    permissions:
+      id-token: write
+      contents: read
+      issues: write
+      pull-requests: write
     timeout-minutes: 75
     steps:
       - name: Check out repository code
