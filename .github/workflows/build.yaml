@@ -17,7 +17,7 @@ jobs:
         new_cpp_version=$(<path-to-version-file)
 
     # Loop through the wrapper repositories and create PRs
-        for repo in client-python client-go client-csharp client-java; do
+        for repo in wrapperbuild wrapperbuild1; do
           cd $repo
 
       # Update conanfile.py and build.yml with the new version
@@ -33,6 +33,6 @@ jobs:
         gh pr create --base main --head update-client-cpp-version --title "Update client-cpp version to $new_cpp_version" --body "Automated PR created by GitHub Actions"
       
         cd ..
-      done
+        done
 
 
