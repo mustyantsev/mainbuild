@@ -21,7 +21,7 @@ fi
 
 # Get the release details (you might need to adapt this)
 release_info=$(gh release view "mustyantsev/mainbuild" latest --json tag_name --jq "v1.0.0")
-
+echo "Release info"
 echo $release_info
 
 if [ $? -ne 0 ]; then
@@ -32,11 +32,11 @@ fi
 # Loop through wrapper repositories and update files
 for wrapper_repo_name in "${wrapper_repos[@]}"; do
   branch_name="update-to-$new_version"
-
+echo "before checkout info"
   # Create a new branch in the wrapper repository
   gh repo fork "mustyantsev/$wrapper_repo_name" --clone true --remote true
   git checkout -b "$branch_name"
-
+echo "after checkout info"
   # Update conanfile.py
   conanfile_path="conanfile.py"
   new_conanfile_content="
