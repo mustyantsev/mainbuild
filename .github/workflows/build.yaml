@@ -8,8 +8,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout client-cpp
-      uses: actions/checkout@v2
 
     - name: Create PRs for wrapper repositories
       run: |
