@@ -26,7 +26,7 @@ jobs:
       - name: Create PRs for wrapper repositories
         run: |
           new_cpp_version=${{ env.V_VERSION }}
-          for repo in client-python client-go client-csharp client-java; do
+          for repo in wrapperbuild wrapperbuild1; do
             cd $repo
             git add conanfile.py build.yml
             git commit -m "Update client-cpp version to $new_cpp_version"
