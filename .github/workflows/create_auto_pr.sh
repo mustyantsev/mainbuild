@@ -10,8 +10,8 @@ new_version="$V_VERSION"  # Replace with the actual version
 github_token="$GITHUB_TOKEN"
 
 # Initialize GitHub API
-unset GITHUB_TOKEN
-gh auth login --with-token
+#unset GITHUB_TOKEN
+#gh auth login --with-token
 gh repo view "mustyantsev/mainbuild" --json name --jq ".name"
 
 if [ $? -ne 0 ]; then
