@@ -8,29 +8,28 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-
-    - name: Create PRs for wrapper repositories
-      run: |
+      - name: Create PRs for wrapper repositories
+        run: |
        # Fetch the new client-cpp version from your code
-        new_cpp_version=$(<path-to-version-file)
+          new_cpp_version=$(<path-to-version-file)
 
     # Loop through the wrapper repositories and create PRs
-        for repo in wrapperbuild wrapperbuild1; do
-          cd $repo
+          for repo in wrapperbuild wrapperbuild1; do
+            cd $repo
 
       # Update conanfile.py and build.yml with the new version
 
-        git add conanfile.py build.yml
-        git commit -m "Update client-cpp version to $new_cpp_version"
+            git add conanfile.py build.yml
+            git commit -m "Update client-cpp version to $new_cpp_version"
 
       # Create a branch and push changes
-        git checkout -b update-client-cpp-version
-        git push --set-upstream origin update-client-cpp-version
+            git checkout -b update-client-cpp-version
+            git push --set-upstream origin update-client-cpp-version
 
       # Create a PR
-        gh pr create --base main --head update-client-cpp-version --title "Update client-cpp version to $new_cpp_version" --body "Automated PR created by GitHub Actions"
+            gh pr create --base main --head update-client-cpp-version --title "Update client-cpp version to $new_cpp_version" --body "Automated PR created by GitHub Actions"
       
-        cd ..
-        done
+            cd ..
+          done
 
 
