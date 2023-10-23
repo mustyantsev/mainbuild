@@ -33,3 +33,4 @@ jobs:
           ./.github/workflows/create_auto_pr.sh
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
