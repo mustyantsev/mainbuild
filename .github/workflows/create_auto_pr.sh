@@ -61,7 +61,7 @@ for wrapper_repo_name in "${WRAPPER_REPOS[@]}"; do
   # Commit changes
   git commit -m "Automatic update to client-cpp $LATEST_VERSION"
 
-  git push origin "$branch_name"
+  git push --set-upstream origin "$branch_name" -f
 
   gh pr create \
      --body "Automated PR created by GitHub Actions" \
