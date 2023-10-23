@@ -2,10 +2,11 @@
 
 # GitHub repository and release details
 #client_cpp_repo_name="client-cpp"
-client_cpp_repo_name="mustyantsev/mainbuild"
+repo_org="mustyantsev"
+repo_name="mainbuild"
 #wrapper_repos=("client-python" "client-go" "client-csharp" "client-java")
 WRAPPER_REPOS=("wrapperbuild" "wrapperbuild2")
-LATEST_VERSION=$(curl -s 'https://api.github.com/repos/${client_cpp_repo_name}/releases/latest' | jq -r '.tag_name');
+LATEST_VERSION=$(curl -s 'https://api.github.com/repos/'${repo_org}'/'${repo_name}'/releases/latest' | jq -r '.tag_name');
 WORKFLOW_FILE=`dirname $0`/../.github/workflows/build.yml
 CONAN_FILE=`dirname $0`/../conanfile.py
 echo "Latest Release info"
@@ -34,12 +35,12 @@ fi
 for wrapper_repo_name in "${WRAPPER_REPOS[@]}"; do
   branch_name="update-to-$EXTRACTED_VERSION"
 echo "before checkout info"
-  WRAPPER_FOLDER="bin/mustyantsev/$wrapper_repo_name"
+  WRAPPER_FOLDER="bin/'${repo_org}'/'${wrapper_repo_name}'"
   # Create a new branch in the wrapper repository
   git clone \
       --depth=1 \
       --branch=main \
-      https://$PAT@github.com/"mustyantsev/$wrapper_repo_name" \
+      "https://$PAT@github.com/'${repo_org}'/'${wrapper_repo_name}'" \
       $WRAPPER_FOLDER
 
   cd $WRAPPER_FOLDER
