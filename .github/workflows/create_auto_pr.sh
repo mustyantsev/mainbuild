@@ -55,7 +55,7 @@ echo "before checkout info"
   conanfile_path=$CONAN_FILE
   config_conan=$(cat $conanfile_path)
   search_line='self.requires("opentdf-client/'
-  new_conanfile_content=$(echo "$config_conan" | sed "s/${search_line}[0-9.]*@/${search_line}${EXTRACTED_VERSION}@/")
+  new_conanfile_content=$(echo "$config_conan" | sed "s|${search_line}[0-9.]*@|${search_line}${EXTRACTED_VERSION}@|")
   echo "$new_conanfile_content" > "$conanfile_path"
   git add "$conanfile_path"
 
