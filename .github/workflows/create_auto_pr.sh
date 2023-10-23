@@ -29,6 +29,9 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+git config user.name "${GITHUB_ACTOR}"
+git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
 # Loop through wrapper repositories and update files
 for wrapper_repo_name in "${wrapper_repos[@]}"; do
   branch_name="update-to-$new_version"
