@@ -13,7 +13,8 @@ jobs:
   run-build-ubuntu:
     runs-on: ubuntu-20.04
     env:
-      ACTIONS_STEP_DEBUG: true
+      ACTIONS_STEP_DEBUG: ${{ secrets.ACTIONS_STEP_DEBUG }}
+      ACTIONS_RUNNER_DEBUG: ${{ secrets.ACTIONS_RUNNER_DEBUG }}
  #   permissions:
  #     id-token: write
  #     contents: read
