@@ -9,7 +9,7 @@ LATEST_VERSION=$(curl -s 'https://api.github.com/repos/mustyantsev/mainbuild/rel
 echo "Latest Release info"
 echo $LATEST_VERSION
 # GitHub token (Make sure it's available as a secret in your repository)
-github_token="$GITHUB_TOKEN"
+github_token="$ACCESS_TOKEN"
 
 # Initialize GitHub API
 #unset GITHUB_TOKEN
@@ -38,9 +38,22 @@ git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 for wrapper_repo_name in "${wrapper_repos[@]}"; do
   branch_name="update-to-$new_version"
 echo "before checkout info"
+FOLDER="bin/mustyantsev/$wrapper_repo_name"
   # Create a new branch in the wrapper repository
-  gh repo fork "mustyantsev/$wrapper_repo_name" --clone true --remote true
-  git checkout -b "$branch_name"
+  git clone \
+              --depth=1 \
+              --branch=main \
+              https://mustyantsev:${{ secrets.ACCESS_TOKEN }}@github.com/$branch_name \
+              $FOLDER
+
+            cd $FOLDER
+
+            # Setup the committers identity.
+            git config user.email "some-user@some-domain.com"
+            git config user.name "Some User"
+
+            # Create a new feature branch for the changes.
+            git checkout -b $branch_name
 echo "after checkout info"
   # Update conanfile.py
   conanfile_path="conanfile.py"
@@ -65,8 +78,13 @@ version: $new_version
   # Commit changes
   git commit -m "Update to client-cpp $new_version"
   git push origin "$branch_name"
-
+  echo "$github_token" > token.txt
   # Create a Pull Request
-  gh pr create "mustyantsev/$wrapper_repo_name" --base "main" --head "$branch_name" --title "Update to client-cpp $new_version" --body "Automated PR created by GitHub Actions"
+  gh auth login --with-token < token.txt
+  gh pr create \
+            --body "" \
+            --title "chore: update scripts to $LATEST_TAG" \
+            --head "$branch_name" \
+            --base "main"
   echo "Created PR in $wrapper_repo_name."
 done
