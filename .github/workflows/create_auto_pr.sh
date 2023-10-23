@@ -33,7 +33,8 @@ fi
 
 # Loop through wrapper repositories and update files
 for wrapper_repo_name in "${WRAPPER_REPOS[@]}"; do
-    git config user.name "${GITHUB_ACTOR}"
+    git config --global user.name "${GITHUB_ACTOR}"
+    git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
   branch_name="update-to-$EXTRACTED_VERSION"
 echo "before checkout info"
   WRAPPER_FOLDER="bin/"${wrapper_repo_name}
