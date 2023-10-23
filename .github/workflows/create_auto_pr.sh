@@ -51,7 +51,7 @@ echo "before checkout info"
   git checkout -b $branch_name
 
   # Update conanfile.py
-  conanfile_path=$WRAPPER_FOLDER/$CONAN_FILE
+  conanfile_path=$CONAN_FILE
   config_conan=$(cat $conanfile_path)
   search_line='self.requires("opentdf-client/'
   new_conanfile_content=$(echo "$config_conan" | sed "s/${search_line}[0-9.]*@/${search_line}${EXTRACTED_VERSION}@/")
