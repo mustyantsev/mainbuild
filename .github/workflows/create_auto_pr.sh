@@ -7,7 +7,7 @@ repo_name="mainbuild"
 #wrapper_repos=("client-python" "client-go" "client-csharp" "client-java")
 WRAPPER_REPOS=("wrapperbuild" "wrapperbuild2")
 LATEST_VERSION=$(curl -s 'https://api.github.com/repos/'${repo_org}'/'${repo_name}'/releases/latest' | jq -r '.tag_name');
-WORKFLOW_FILE="./github/workflows/build.yml"
+WORKFLOW_FILE=".github/workflows/build.yml"
 CONAN_FILE="conanfile.py"
 echo "Latest Release info"
 echo $LATEST_VERSION
