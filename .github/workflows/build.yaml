@@ -12,11 +12,13 @@ jobs:
 
   run-build-ubuntu:
     runs-on: ubuntu-20.04
-    permissions:
-      id-token: write
-      contents: read
-      issues: write
-      pull-requests: write
+    env:
+      ACTIONS_STEP_DEBUG: true
+ #   permissions:
+ #     id-token: write
+ #     contents: read
+ #     issues: write
+ #     pull-requests: write
     timeout-minutes: 75
     steps:
       - name: Check out repository code

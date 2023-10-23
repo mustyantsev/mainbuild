@@ -9,8 +9,6 @@ WRAPPER_REPOS=("wrapperbuild" "wrapperbuild2")
 LATEST_VERSION=$(curl -s 'https://api.github.com/repos/'${repo_org}'/'${repo_name}'/releases/latest' | jq -r '.tag_name');
 WORKFLOW_FILE=".github/workflows/build.yaml"
 CONAN_FILE="conanfile.py"
-echo "Latest Release info"
-echo $LATEST_VERSION
 
 PAT="$ACCESS_TOKEN"
 
@@ -20,10 +18,7 @@ else
   echo "Invalid version format"
   exit 1
 fi
-# Initialize GitHub API
-#unset GITHUB_TOKEN
-#gh auth login --with-token
-#gh repo view "mustyantsev/mainbuild" --json name --jq ".name"
+
 
 if [ $? -ne 0 ]; then
   echo "Failed to authenticate with GitHub."
@@ -64,7 +59,7 @@ for wrapper_repo_name in "${WRAPPER_REPOS[@]}"; do
   git add "$build_yml_path"
 
   # Commit changes
-  git commit -m "Update to client-cpp $LATEST_VERSION"
+  git commit -m "Automatic update to client-cpp $LATEST_VERSION"
 
   git push origin "$branch_name"
 
