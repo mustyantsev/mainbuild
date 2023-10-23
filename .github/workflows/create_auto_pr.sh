@@ -35,7 +35,7 @@ fi
 for wrapper_repo_name in "${WRAPPER_REPOS[@]}"; do
   git config --global user.name "${GITHUB_ACTOR}"
   git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-  branch_name="update-to-$EXTRACTED_VERSION"
+  branch_name="automatic-update-to-$EXTRACTED_VERSION"
   WRAPPER_FOLDER="bin/"${wrapper_repo_name}
   # Create a new branch in the wrapper repository
   git clone \
