@@ -76,4 +76,5 @@ echo "before checkout info"
      --head "$branch_name" \
      --base "main"
   echo "Created PR in $wrapper_repo_name."
+  cd ..
 done
