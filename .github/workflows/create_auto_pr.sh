@@ -49,8 +49,8 @@ FOLDER="bin/mustyantsev/$wrapper_repo_name"
             cd $FOLDER
 
             # Setup the committers identity.
-            git config user.email "some-user@some-domain.com"
-            git config user.name "Some User"
+            #git config user.email "some-user@some-domain.com"
+            #git config user.name "Some User"
 
             # Create a new feature branch for the changes.
             git checkout -b $branch_name
