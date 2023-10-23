@@ -46,7 +46,7 @@ echo "before checkout info"
       $WRAPPER_FOLDER
 
   cd $WRAPPER_FOLDER
-  ls
+  ls -al
   pwd
   git checkout -b $branch_name
 
