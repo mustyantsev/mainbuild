@@ -35,7 +35,7 @@ fi
 for wrapper_repo_name in "${WRAPPER_REPOS[@]}"; do
   branch_name="update-to-$EXTRACTED_VERSION"
 echo "before checkout info"
-  WRAPPER_FOLDER="bin/"${wrapper_repo_name}"
+  WRAPPER_FOLDER="bin/"${wrapper_repo_name}
   # Create a new branch in the wrapper repository
   git clone \
       --depth=1 \
