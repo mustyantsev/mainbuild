@@ -60,11 +60,11 @@ echo "before checkout info"
   git add "$conanfile_path"
 
   # Update build.yml
-  #build_yml_path=$WRAPPER_FOLDER/$WORKFLOW_FILE
-  #config_yaml=$(cat $build_yml_path)
-  #new_build_yml_content=$(echo "$config_yaml" | sed "s/VCLIENT_CPP_VER: .*/VCLIENT_CPP_VER: $EXTRACTED_VERSION/")
-  #echo "$new_build_yml_content" > "$build_yml_path"
-  #git add "$build_yml_path"
+  build_yml_path=$WORKFLOW_FILE
+  config_yaml=$(cat $build_yml_path)
+  new_build_yml_content=$(echo "$config_yaml" | sed "s/VCLIENT_CPP_VER: .*/VCLIENT_CPP_VER: $EXTRACTED_VERSION/")
+  echo "$new_build_yml_content" > "$build_yml_path"
+  git add "$build_yml_path"
 
   # Commit changes
   git commit -m "Update to client-cpp $LATEST_VERSION"
