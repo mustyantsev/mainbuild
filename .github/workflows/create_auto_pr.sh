@@ -5,7 +5,7 @@
 client_cpp_repo_name="mustyantsev/mainbuild"
 #wrapper_repos=("client-python" "client-go" "client-csharp" "client-java")
 WRAPPER_REPOS=("wrapperbuild" "wrapperbuild2")
-LATEST_VERSION=$(curl -s 'https://api.github.com/repos/$client_cpp_repo_name/releases/latest' | jq -r '.tag_name');
+LATEST_VERSION=$(curl -s 'https://api.github.com/repos/${client_cpp_repo_name}/releases/latest' | jq -r '.tag_name');
 WORKFLOW_FILE=`dirname $0`/../.github/workflows/build.yml
 CONAN_FILE=`dirname $0`/../conanfile.py
 echo "Latest Release info"
