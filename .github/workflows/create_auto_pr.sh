@@ -31,8 +31,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-git config user.name "${GITHUB_ACTOR}"
-git config user.email "mustyantsev@lohika.com"
+
 
 # Loop through wrapper repositories and update files
 for wrapper_repo_name in "${wrapper_repos[@]}"; do
@@ -49,8 +48,8 @@ FOLDER="bin/mustyantsev/$wrapper_repo_name"
             cd $FOLDER
 
             # Setup the committers identity.
-            #git config user.email "some-user@some-domain.com"
-            #git config user.name "Some User"
+            git config user.name "${GITHUB_ACTOR}"
+            git config user.email "mustyantsev@lohika.com"
 
             # Create a new feature branch for the changes.
             git checkout -b $branch_name
