@@ -35,12 +35,12 @@ fi
 for wrapper_repo_name in "${WRAPPER_REPOS[@]}"; do
   branch_name="update-to-$EXTRACTED_VERSION"
 echo "before checkout info"
-  WRAPPER_FOLDER="bin/'${repo_org}'/'${wrapper_repo_name}'"
+  WRAPPER_FOLDER="bin/${repo_org}'/'${wrapper_repo_name}"
   # Create a new branch in the wrapper repository
   git clone \
       --depth=1 \
       --branch=main \
-      "https://$PAT@github.com/'${repo_org}'/'${wrapper_repo_name}'" \
+      https://$PAT@github.com/${repo_org}'/'${wrapper_repo_name} \
       $WRAPPER_FOLDER
 
   cd $WRAPPER_FOLDER
