@@ -49,7 +49,7 @@ echo "before checkout info"
   git checkout -b $branch_name
 
   # Update conanfile.py
-  conanfile_path=$CONAN_FILE
+  conanfile_path=$WRAPPER_FOLDER/$CONAN_FILE
   config_conan=$(cat $conanfile_path)
   search_line='self.requires("opentdf-client/'
   new_conanfile_content=$(echo "$config_conan" | sed "s/${search_line}[0-9.]*@/${search_line}${EXTRACTED_VERSION}@/")
@@ -57,7 +57,7 @@ echo "before checkout info"
   git add "$conanfile_path"
 
   # Update build.yml
-  build_yml_path=$WORKFLOW_FILE
+  build_yml_path=$WRAPPER_FOLDER/$WORKFLOW_FILE
   config_yaml=$(cat $build_yml_path)
   new_build_yml_content=$(echo "$config_yaml" | sed "s/VCLIENT_CPP_VER: .*/VCLIENT_CPP_VER: $EXTRACTED_VERSION/")
   echo "$new_build_yml_content" > "$build_yml_path"
