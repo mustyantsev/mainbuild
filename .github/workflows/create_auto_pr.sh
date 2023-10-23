@@ -43,7 +43,7 @@ FOLDER="bin/mustyantsev/$wrapper_repo_name"
   git clone \
               --depth=1 \
               --branch=main \
-              https://mustyantsev:${{ secrets.ACCESS_TOKEN }}@github.com/$branch_name \
+              https://mustyantsev:$ACCESS_TOKEN@github.com/$branch_name \
               $FOLDER
 
             cd $FOLDER
