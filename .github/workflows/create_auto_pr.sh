@@ -33,10 +33,9 @@ fi
 
 # Loop through wrapper repositories and update files
 for wrapper_repo_name in "${WRAPPER_REPOS[@]}"; do
-    git config --global user.name "${GITHUB_ACTOR}"
-    git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+  git config --global user.name "${GITHUB_ACTOR}"
+  git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
   branch_name="update-to-$EXTRACTED_VERSION"
-echo "before checkout info"
   WRAPPER_FOLDER="bin/"${wrapper_repo_name}
   # Create a new branch in the wrapper repository
   git clone \
@@ -46,10 +45,8 @@ echo "before checkout info"
       $WRAPPER_FOLDER
 
   cd $WRAPPER_FOLDER
-  ls -al
-  pwd
-  git checkout -b $branch_name
 
+  git checkout -b $branch_name
 
   # Update conanfile.py
   conanfile_path=$CONAN_FILE
@@ -68,12 +65,12 @@ echo "before checkout info"
 
   # Commit changes
   git commit -m "Update to client-cpp $LATEST_VERSION"
-  echo "before push"
+
   git push origin "$branch_name"
 
   gh pr create \
-     --body "" \
-     --title "chore: update scripts to $LATEST_VERSION" \
+     --body "Automated PR created by GitHub Actions" \
+     --title "Update to client-cpp $LATEST_VERSION" \
      --head "$branch_name" \
      --base "main"
   echo "Created PR in $wrapper_repo_name."
