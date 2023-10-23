@@ -7,8 +7,8 @@ repo_name="mainbuild"
 #wrapper_repos=("client-python" "client-go" "client-csharp" "client-java")
 WRAPPER_REPOS=("wrapperbuild" "wrapperbuild2")
 LATEST_VERSION=$(curl -s 'https://api.github.com/repos/'${repo_org}'/'${repo_name}'/releases/latest' | jq -r '.tag_name');
-WORKFLOW_FILE=`dirname $0`/build.yml
-CONAN_FILE=`dirname $0`/../../conanfile.py
+WORKFLOW_FILE="./github/workflows/build.yml"
+CONAN_FILE="conanfile.py"
 echo "Latest Release info"
 echo $LATEST_VERSION
 
@@ -44,6 +44,8 @@ echo "before checkout info"
       $WRAPPER_FOLDER
 
   cd $WRAPPER_FOLDER
+  ls
+  pwd
 
   git config user.name "${GITHUB_ACTOR}"
   git checkout -b $branch_name
