@@ -32,7 +32,7 @@ if [ $? -ne 0 ]; then
 fi
 
 git config user.name "${GITHUB_ACTOR}"
-git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+git config user.email "mustyantsev@lohika.com"
 
 # Loop through wrapper repositories and update files
 for wrapper_repo_name in "${wrapper_repos[@]}"; do
