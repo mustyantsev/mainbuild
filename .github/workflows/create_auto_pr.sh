@@ -49,6 +49,8 @@ FOLDER="bin/mustyantsev/$wrapper_repo_name"
 
             # Setup the committers identity.
             git config user.name "${GITHUB_ACTOR}"
+            echo "User name"
+            echo ${GITHUB_ACTOR}
             git config user.email "mustyantsev@lohika.com"
 
             # Create a new feature branch for the changes.
@@ -78,6 +80,7 @@ version: $new_version
   git commit -m "Update to client-cpp $new_version"
   echo "before push"
   git push origin "$branch_name"
+  #git push "https://$GITHUB_ACTOR:${{ secrets.ACCESS_TOKEN }}
   echo "after push"
   echo "$github_token" > token.txt
   # Create a Pull Request
