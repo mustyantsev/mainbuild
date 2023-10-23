@@ -15,11 +15,10 @@ jobs:
     env:
       ACTIONS_STEP_DEBUG: ${{ secrets.ACTIONS_STEP_DEBUG }}
       ACTIONS_RUNNER_DEBUG: ${{ secrets.ACTIONS_RUNNER_DEBUG }}
- #   permissions:
- #     id-token: write
- #     contents: read
- #     issues: write
- #     pull-requests: write
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
     timeout-minutes: 75
     steps:
       - name: Check out repository code
