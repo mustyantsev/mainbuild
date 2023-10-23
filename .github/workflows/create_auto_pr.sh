@@ -5,7 +5,9 @@ client_cpp_repo_name="client-cpp"
 #wrapper_repos=("client-python" "client-go" "client-csharp" "client-java")
 wrapper_repos=("wrapperbuild" "wrapperbuild1")
 new_version="$V_VERSION"  # Replace with the actual version
-
+LATEST_VERSION=$(curl -s 'https://api.github.com/repos/mustyantsev/mainbuild/releases/latest' | jq -r '.tag_name');
+echo "Latest Release info"
+echo $LATEST_VERSION
 # GitHub token (Make sure it's available as a secret in your repository)
 github_token="$GITHUB_TOKEN"
 
