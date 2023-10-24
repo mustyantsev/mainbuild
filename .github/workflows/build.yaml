@@ -1,10 +1,9 @@
 name: Run build
 on:
-  push:
-    tags:
-      - '*.*.*'
+  create:
 jobs:
   run-build-ubuntu:
+    if: ${{ contains(github.ref, 'refs/tags/') }}
     runs-on: ubuntu-20.04
     env:
       ACTIONS_STEP_DEBUG: ${{ secrets.ACTIONS_STEP_DEBUG }}
