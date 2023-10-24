@@ -2,7 +2,7 @@ name: Run build
 on:
   release:
     types:
-      - created
+      - published
 jobs:
 
   run-build-ubuntu:
