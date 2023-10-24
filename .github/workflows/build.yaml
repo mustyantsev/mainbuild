@@ -1,10 +1,9 @@
 name: Run build
 on:
-  release:
-    types:
-      - published
+  push:
+    tags:
+      - '*.*.*'
 jobs:
-
   run-build-ubuntu:
     runs-on: ubuntu-20.04
     env:

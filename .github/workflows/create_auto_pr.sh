@@ -12,14 +12,6 @@ CONAN_FILE="conanfile.py"
 
 PAT="$ACCESS_TOKEN"
 
-if [[ $LATEST_VERSION =~ ([0-9]+\.[0-9]+\.[0-9]+) ]]; then
-  EXTRACTED_VERSION="${BASH_REMATCH[1]}"
-else
-  echo "Invalid version format"
-  exit 1
-fi
-
-
 if [ $? -ne 0 ]; then
   echo "Failed to authenticate with GitHub."
   exit 1
@@ -47,14 +39,14 @@ for wrapper_repo_name in "${WRAPPER_REPOS[@]}"; do
   conanfile_path=$CONAN_FILE
   config_conan=$(cat $conanfile_path)
   search_line='self.requires("opentdf-client/'
-  new_conanfile_content=$(echo "$config_conan" | sed "s|${search_line}[0-9.]*@|${search_line}${EXTRACTED_VERSION}@|")
+  new_conanfile_content=$(echo "$config_conan" | sed "s|${search_line}[0-9.]*@|${search_line}${LATEST_VERSION}@|")
   echo "$new_conanfile_content" > "$conanfile_path"
   git add "$conanfile_path"
 
   # Update build.yml
   build_yml_path=$WORKFLOW_FILE
   config_yaml=$(cat $build_yml_path)
-  new_build_yml_content=$(echo "$config_yaml" | sed "s/VCLIENT_CPP_VER: .*/VCLIENT_CPP_VER: $EXTRACTED_VERSION/")
+  new_build_yml_content=$(echo "$config_yaml" | sed "s/VCLIENT_CPP_VER: .*/VCLIENT_CPP_VER: $LATEST_VERSION/")
   echo "$new_build_yml_content" > "$build_yml_path"
   git add "$build_yml_path"
 
