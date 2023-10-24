@@ -1,0 +1,26 @@
+name: Run build
+on:
+  create:
+jobs:
+  run-build-ubuntu:
+    if: ${{ contains(github.ref, 'refs/tags/') }}
+    runs-on: ubuntu-20.04
+    env:
+      ACTIONS_STEP_DEBUG: ${{ secrets.ACTIONS_STEP_DEBUG }}
+      ACTIONS_RUNNER_DEBUG: ${{ secrets.ACTIONS_RUNNER_DEBUG }}
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
+    timeout-minutes: 75
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+
+      - name: Create PRs for wrapper repositories
+        run: |
+          ./.github/workflows/create_auto_pr.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
