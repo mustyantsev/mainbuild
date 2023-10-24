@@ -1,10 +1,5 @@
 name: Run build
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
-  push:
-    branches:
-      - main
   release:
     types:
       - created
@@ -24,11 +19,6 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-
-      - name: Get Version
-        run: |
-          VER=$(cat VERSION)
-          echo "V_VERSION=$VER" >> $GITHUB_ENV
 
       - name: Create PRs for wrapper repositories
         run: |
