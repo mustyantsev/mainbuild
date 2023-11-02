@@ -11,6 +11,7 @@ jobs:
     env:
       ACTIONS_STEP_DEBUG: ${{ secrets.ACTIONS_STEP_DEBUG }}
       ACTIONS_RUNNER_DEBUG: ${{ secrets.ACTIONS_RUNNER_DEBUG }}
+      LATEST_VERSION: $(curl -s 'https://api.github.com/repos/mustyantsev/mainbuild/releases/latest' | jq -r '.tag_name');
     permissions:
       contents: write
       pull-requests: write
@@ -22,10 +23,18 @@ jobs:
         with:
           repository: ${{ matrix.wrapper_repos }}
           path: wrapper_repos
-          fetch-depth: 0
+          fetch-depth: 1
       - name: LS dirs
         run: |
-          ls -al wrapper_repos
+          cd wrapper_repos
+          ls -al
+      - name: Update conan file
+        run: |
+          config_conan=$(cat conanfile.py)
+          search_line='self.requires("opentdf-client/'
+          new_conanfile_content=$(echo "$config_conan" | sed "s|${search_line}[0-9.]*@|${search_line}${LATEST_VERSION}@|")
+          echo "$new_conanfile_content" > "$conanfile_path"
+          git add conanfile.py
 
 #      - name: Create PRs for wrapper repositories
 #        run: |
