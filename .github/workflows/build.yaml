@@ -25,6 +25,7 @@ jobs:
           fetch-depth: 1
       - name: Update conan file
         run: |
+          cd wrapper_repo
           LATEST_VERSION=$(curl -s 'https://api.github.com/repos/mustyantsev/mainbuild/releases/latest' | jq -r '.tag_name')
           config_conan=$(cat conanfile.py)
           search_line='self.requires("opentdf-client/'
@@ -34,6 +35,7 @@ jobs:
           git add conanfile.py
       - name: Update build yaml file
         run: |
+          cd wrapper_repo
           LATEST_VERSION=$(curl -s 'https://api.github.com/repos/mustyantsev/mainbuild/releases/latest' | jq -r '.tag_name')
           build_yml_path=".github/workflows/build.yaml"
           config_yaml=$(cat $build_yml_path)
