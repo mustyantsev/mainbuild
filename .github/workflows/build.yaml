@@ -23,6 +23,7 @@ jobs:
           repository: ${{ matrix.wrapper_repos }}
           path: wrapper_repos
           fetch-depth: 0
+      - name: LS dirs
         run: |
           ls
 
