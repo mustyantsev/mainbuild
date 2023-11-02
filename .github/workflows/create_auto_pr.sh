@@ -1,6 +1,5 @@
 #!/bin/bash
 
-WRAPPER_REPOS=("wrapperbuild" "wrapperbuild2")
 LATEST_VERSION=$(curl -s 'https://api.github.com/repos/mustyantsev/mainbuild/releases/latest' | jq -r '.tag_name')
 WORKFLOW_FILE=".github/workflows/build.yaml"
 CONAN_FILE="conanfile.py"

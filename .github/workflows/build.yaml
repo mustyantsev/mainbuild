@@ -17,7 +17,11 @@ jobs:
       repository-projects: write
     timeout-minutes: 75
     steps:
-      - name: Checkout the ${{ matrix.wrapper_repos }} wrapper_repos
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+
+      - name: Checkout the ${{ matrix.wrapper_repos }}
         uses: actions/checkout@master
         with:
           repository: ${{ matrix.wrapper_repos }}
