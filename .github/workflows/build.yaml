@@ -26,6 +26,7 @@ jobs:
           fetch-depth: 1
       - name: Update conan file
         run: |
+          echo ${LATEST_VERSION}
           cd wrapper_repo
           ls -al
           config_conan=$(cat conanfile.py)
