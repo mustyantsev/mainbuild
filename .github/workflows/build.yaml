@@ -22,14 +22,12 @@ jobs:
         uses: actions/checkout@master
         with:
           repository: ${{ matrix.wrapper_repos }}
-          path: wrapper_repos
+          path: wrapper_repo
           fetch-depth: 1
-      - name: LS dirs
-        run: |
-          cd wrapper_repos
-          ls -al
       - name: Update conan file
         run: |
+          cd wrapper_repo
+          ls -al
           config_conan=$(cat conanfile.py)
           search_line='self.requires("opentdf-client/'
           new_conanfile_content=$(echo "$config_conan" | sed "s|${search_line}[0-9.]*@|${search_line}${LATEST_VERSION}@|")
