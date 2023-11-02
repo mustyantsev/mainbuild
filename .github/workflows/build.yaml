@@ -32,7 +32,7 @@ jobs:
           config_conan=$(cat conanfile.py)
           search_line='self.requires("opentdf-client/'
           new_conanfile_content=$(echo "$config_conan" | sed "s|${search_line}[0-9.]*@|${search_line}${LATEST_VERSION}@|")
-          echo "$new_conanfile_content" > "$conanfile_path"
+          echo "$new_conanfile_content" > conanfile.py
           cat conanfile.py
           git add conanfile.py
 
