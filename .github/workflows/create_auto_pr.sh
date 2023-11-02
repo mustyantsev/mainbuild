@@ -6,8 +6,8 @@ CONAN_FILE="conanfile.py"
 
 PAT="$ACCESS_TOKEN"
 
- # git config --global user.name "${GITHUB_ACTOR}"
- # git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+git config --global user.name "${GITHUB_ACTOR}"
+git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 branch_name="automatic-update-to-$LATEST_VERSION"
 
 cd wrapper_repo
