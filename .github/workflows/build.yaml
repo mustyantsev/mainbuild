@@ -25,7 +25,7 @@ jobs:
           fetch-depth: 0
       - name: LS dirs
         run: |
-          ls
+          ls wrapper_repos
 
 #      - name: Create PRs for wrapper repositories
 #        run: |
