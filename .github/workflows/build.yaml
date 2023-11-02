@@ -23,29 +23,10 @@ jobs:
           repository: ${{ matrix.wrapper_repos }}
           path: wrapper_repo
           fetch-depth: 1
-      - name: Update conan file
-        run: |
-          cd wrapper_repo
-          LATEST_VERSION=$(curl -s 'https://api.github.com/repos/mustyantsev/mainbuild/releases/latest' | jq -r '.tag_name')
-          config_conan=$(cat conanfile.py)
-          search_line='self.requires("opentdf-client/'
-          new_conanfile_content=$(echo "$config_conan" | sed "s|${search_line}[0-9.]*@|${search_line}${LATEST_VERSION}@|")
-          echo "$new_conanfile_content" > conanfile.py
-          cat conanfile.py
-          git add conanfile.py
-      - name: Update build yaml file
-        run: |
-          cd wrapper_repo
-          LATEST_VERSION=$(curl -s 'https://api.github.com/repos/mustyantsev/mainbuild/releases/latest' | jq -r '.tag_name')
-          build_yml_path=".github/workflows/build.yaml"
-          config_yaml=$(cat $build_yml_path)
-          new_build_yml_content=$(echo "$config_yaml" | sed "s/VCLIENT_CPP_VER: .*/VCLIENT_CPP_VER: $LATEST_VERSION/")
-          echo "$new_build_yml_content" > "$build_yml_path"
-          git add "$build_yml_path"
 
-#      - name: Create PRs for wrapper repositories
-#        run: |
-#          ./.github/workflows/create_auto_pr.sh
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      - name: Create PRs for wrapper repositories
+        run: |
+          ./.github/workflows/create_auto_pr.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
