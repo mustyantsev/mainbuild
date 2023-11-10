@@ -6,7 +6,7 @@ CONAN_FILE="main-src/conanfile.py"
 git config --global user.name "${GITHUB_ACTOR}"
 git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 BRANCH_NAME="automatic-update-to-client-cpp-$NEW_VERSION"
-
+ls
 git checkout -b $BRANCH_NAME
 echo "after new branch"
 # Update conanfile.py
