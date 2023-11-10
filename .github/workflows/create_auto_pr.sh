@@ -16,6 +16,7 @@ search_line='self.requires("opentdf-client/'
 new_conanfile_content=$(echo "$config_conan" | sed "s|${search_line}[0-9.]*@|${search_line}${NEW_VERSION}@|")
 echo "$new_conanfile_content" > "$conanfile_path"
 git add "$conanfile_path"
+cat $conanfile_path
 echo "after add1"
 # Update build.yml
 build_yml_path=$WORKFLOW_FILE
@@ -23,6 +24,7 @@ config_yaml=$(cat $build_yml_path)
 new_build_yml_content=$(echo "$config_yaml" | sed "s/VCLIENT_CPP_VER: .*/VCLIENT_CPP_VER: $NEW_VERSION/")
 echo "$new_build_yml_content" > "$build_yml_path"
 git add "$build_yml_path"
+cat $build_yml_path
 echo "after add2"
 # Commit changes
 git commit -m "Automatic update to client-cpp $NEW_VERSION"
