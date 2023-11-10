@@ -1,6 +1,6 @@
 #!/bin/bash
 
-WORKFLOW_FILE=".github/workflows/build.yml"
+WORKFLOW_FILE=".github/workflows/build.yaml"
 CONAN_FILE="main-src/conanfile.py"
 
 git config --global user.name "${GITHUB_ACTOR}"
@@ -28,6 +28,7 @@ git add "$build_yml_path"
 git commit -m "Automatic update to client-cpp $NEW_VERSION"
 
 git push --set-upstream origin HEAD:"$BRANCH_NAME" -f
+git status 
 sleep 5
 gh pr create \
     --body "Automated PR created by GitHub Actions" \
