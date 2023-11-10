@@ -28,7 +28,7 @@ echo "after add2"
 git commit -m "Automatic update to client-cpp $NEW_VERSION"
 echo "after commit"
 git push --set-upstream origin HEAD:"$BRANCH_NAME" -f
-
+echo "after push"
 sleep 5
 gh pr create \
     --body "Automated PR created by GitHub Actions" \
